@@ -1,0 +1,108 @@
+name: Integrate AMIS aiMarketing form
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/workflows/integrate-amis-form.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update landing page
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = re.sub(
+              r'<link rel="canonical" href="[^"]+"\s*/>',
+              '<link rel="canonical" href="https://thanhmaimisa-giaiphapketoan.pages.dev/" />',
+              s,
+              count=1,
+          )
+
+          if 'property="og:url"' not in s:
+              s = s.replace(
+                  '<meta property="og:type" content="website" />',
+                  '<meta property="og:type" content="website" />\n  <meta property="og:url" content="https://thanhmaimisa-giaiphapketoan.pages.dev/" />',
+                  1,
+              )
+
+          s = s.replace(
+              'Trang này chỉ tập trung vào khách hàng <strong>doanh nghiệp</strong>. Mai không tư vấn gói hộ kinh doanh tại landing page này.',
+              'Trang này tập trung chuyên sâu vào khách hàng <strong>doanh nghiệp</strong> và các nhu cầu tài chính – kế toán liên quan.',
+          )
+          s = s.replace(
+              'Form được thiết kế theo cấu trúc thu lead doanh nghiệp. Sau khi kết nối AMIS aiMarketing, dữ liệu sẽ tự động chuyển vào hệ thống để Thanh Mai quản lý và chăm sóc.',
+              'Thông tin đăng ký được ghi nhận trực tiếp qua Form AMIS aiMarketing để Thanh Mai quản lý và chăm sóc lead tập trung.',
+          )
+          s = s.replace(
+              'Landing page này dành riêng cho khách hàng doanh nghiệp cần giải pháp kế toán MISA. Không nhận nhu cầu hộ kinh doanh.',
+              'Landing page này dành riêng cho khách hàng doanh nghiệp cần giải pháp kế toán MISA.',
+          )
+
+          embed = '''        <div class="lead-form reveal delay-1" id="amisLeadForm" aria-label="Form đăng ký tư vấn Thanh Mai MISA">
+            <div class="form-title">
+              <span class="form-kicker">Tư vấn 1-1</span>
+              <h3>Đăng ký tư vấn miễn phí</h3>
+              <p>Dành cho doanh nghiệp cần giải pháp kế toán MISA.</p>
+            </div>
+            <!-- AMIS aiMarketing Form Embed Code -->
+            <div class="aimarketing-form-embed-code">
+              <script env="production" id="ladizone-form-renderer" src="https://amismisa.misacdn.net/apps/aimarketing/customer/form-editor/static/js/form-renderer.js"></script>
+              <script render-for="c1476344-3bd9-49d2-8032-2769bc0552c5">
+                globalThis.lzfr.renderExternalForm({
+                  formId: "c1476344-3bd9-49d2-8032-2769bc0552c5",
+                  tenantId: "ba083938-aaff-48fe-9efe-0bea245fe7bd",
+                  domainUnomi: "https://ladizone.com"
+                });
+              </script>
+            </div>
+            <!-- end AMIS aiMarketing Form Embed Code -->
+            <p class="form-note">Thông tin đăng ký được chuyển trực tiếp vào AMIS aiMarketing theo cấu hình Form “Đăng ký tư vấn – Thanh Mai MISA”.</p>
+          </div>'''
+
+          s, n = re.subn(
+              r'        <form id="leadForm".*?        </form>',
+              embed,
+              s,
+              count=1,
+              flags=re.S,
+          )
+          if n != 1 and 'id="amisLeadForm"' not in s:
+              raise SystemExit('Could not locate lead form for replacement')
+
+          s = s.replace('  <script src="config.js"></script>\n', '')
+
+          if 'hộ kinh doanh' in s.lower():
+              raise SystemExit('Enterprise-only copy cleanup incomplete')
+          if 'c1476344-3bd9-49d2-8032-2769bc0552c5' not in s:
+              raise SystemExit('AMIS form embed missing')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit integration
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Connect landing page to AMIS aiMarketing form"
+          git push
