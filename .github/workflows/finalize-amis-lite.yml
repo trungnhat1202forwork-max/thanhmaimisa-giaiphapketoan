@@ -5,6 +5,7 @@ on:
     branches: ["main"]
     paths:
       - ".github/workflows/finalize-amis-lite.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,115 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Replace AMIS Lite offer with animated orbit
-        shell: bash
+      - name: Patch landing page
+        env:
+          PATCH_B64: ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCmltcG9ydCByZQoKcCA9IFBhdGgoImluZGV4Lmh0bWwiKQpzID0gcC5yZWFkX3RleHQoZW5jb2Rpbmc9InV0Zi04IikKCnJlcGxhY2VtZW50ID0gIiIiICAgICAgICAgIDxhcnRpY2xlIGNsYXNzPSJvZmZlci1jYXJkIG9mZmVyLWNhcmQtbGl0ZSByZXZlYWwgZGVsYXktMSI+CiAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtc2NlbmUiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQuG7mSBnaeG6o2kgcGjDoXAgQU1JUyBMaXRlIHbhu5tpIGPDoWMgc+G6o24gcGjhuqltIGNodXnhu4NuIMSR4buZbmcgcXVhbmggbG9nbyBNSVNBIEFNSVMiPgogICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtZ2xvdyI+PC9kaXY+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC1yaW5nIHJpbmctYSI+PC9kaXY+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC1yaW5nIHJpbmctYiI+PC9kaXY+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC10cmFjayIgYXJpYS1oaWRkZW49InRydWUiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC1pdGVtIGl0ZW0tMSI+PHNwYW4gY2xhc3M9ImxpdGUtaWNvbiBjaGF0Ij7il4/il4/il488L3NwYW4+PGI+QU1JUyBDaGF0PC9iPjwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC1pdGVtIGl0ZW0tMiI+PHNwYW4gY2xhc3M9ImxpdGUtaWNvbiBzb2NpYWwiPuKcozwvc3Bhbj48Yj5BTUlTIE3huqFuZyB4w6MgaOG7mWk8L2I+PC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLW9yYml0LWl0ZW0gaXRlbS0zIj48c3BhbiBjbGFzcz0ibGl0ZS1pY29uIG5vdGUiPuKJoTwvc3Bhbj48Yj5BTUlTIEdoaSBjaMOpcDwvYj48L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtaXRlbSBpdGVtLTQiPjxzcGFuIGNsYXNzPSJsaXRlLWljb24gcHJvY2VzcyI+UTwvc3Bhbj48Yj5BTUlTIFF1eSB0csOsbmg8L2I+PC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLW9yYml0LWl0ZW0gaXRlbS01Ij48c3BhbiBjbGFzcz0ibGl0ZS1pY29uIGNybSI+4peOPC9zcGFuPjxiPkFNSVMgQ1JNIExpdGU8L2I+PC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLW9yYml0LWl0ZW0gaXRlbS02Ij48c3BhbiBjbGFzcz0ibGl0ZS1pY29uIGhyIj5pPC9zcGFuPjxiPkFNSVMgTmjDom4gdmnDqm48L2I+PC9kaXY+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLW9yYml0LWl0ZW0gaXRlbS03Ij48c3BhbiBjbGFzcz0ibGl0ZS1pY29uIHBlb3BsZSI+8J+RpTwvc3Bhbj48Yj5BTUlTIFRow7RuZyB0aW4gbmjDom4gc+G7sTwvYj48L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtaXRlbSBpdGVtLTgiPjxzcGFuIGNsYXNzPSJsaXRlLWljb24gbWFpbCI+4pyJPC9zcGFuPjxiPkFNSVMgTWFpbDwvYj48L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtaXRlbSBpdGVtLTkiPjxzcGFuIGNsYXNzPSJsaXRlLWljb24gY29udGFjdCI+4piOPC9zcGFuPjxiPkFNSVMgRGFuaCBi4bqhPC9iPjwvZGl2PgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1vcmJpdC1pdGVtIGl0ZW0tMTAiPjxzcGFuIGNsYXNzPSJsaXRlLWljb24gY2FsZW5kYXIiPuKWozwvc3Bhbj48Yj5BTUlTIEzhu4tjaDwvYj48L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImxpdGUtb3JiaXQtaXRlbSBpdGVtLTExIj48c3BhbiBjbGFzcz0ibGl0ZS1pY29uIG9uZWFpIj7inKY8L3NwYW4+PGI+TUlTQSBPbmVBSTwvYj48L2Rpdj4KICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLWNlbnRlci1jYXJkIj4KICAgICAgICAgICAgICAgIDxpbWcgc3JjPSJhc3NldHMvbWlzYS1hbWlzLWxvZ28ud2VicCIgYWx0PSJNSVNBIEFNSVMiIGxvYWRpbmc9ImxhenkiIC8+CiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ibGl0ZS1jZW50ZXIta2lja2VyIj5C4buZIGdp4bqjaSBwaMOhcDwvc3Bhbj4KICAgICAgICAgICAgICAgIDxzdHJvbmc+QU1JUyBMSVRFPC9zdHJvbmc+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsaXRlLW9mZmVyLWJhZGdlIj48c3Bhbj5RVcOAIFThurZORzwvc3Bhbj48Yj4wIMSQ4buSTkc8L2I+PGVtPjEwMCUgTUnhu4ROIFBIw408L2VtPjwvZGl2PgogICAgICAgICAgICAgICAgPHNtYWxsPktoaSBtdWEgcGjhuqduIG3hu4FtIEFNSVMgS+G6vyB0b8Ohbjwvc21hbGw+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJvZmZlci1ib2R5IGxpdGUtb2ZmZXItYm9keSI+CiAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9Im9mZmVyLXRhZyI+UXXDoCB04bq3bmcgQU1JUyBMaXRlPC9zcGFuPgogICAgICAgICAgICAgIDxoMz5OaOG6rW4gYuG7mSBnaeG6o2kgcGjDoXAgQU1JUyBMaXRlIDAgxJHhu5NuZzwvaDM+CiAgICAgICAgICAgICAgPHA+VGhlbyBjaMawxqFuZyB0csOsbmggxrB1IMSRw6NpIG3hu5tpLCBkb2FuaCBuZ2hp4buHcCBtdWEgQU1JUyBL4bq/IHRvw6FuIGPDsyB0aOG7gyBuaOG6rW4gYuG7mSBjw7RuZyBj4bulIEFNSVMgTGl0ZSBn4buTbSBjw6FjIHRp4buHbiDDrWNoIGPhu5luZyB0w6FjLCBraMOhY2ggaMOgbmcsIG5ow6JuIHPhu7EsIGzhu4tjaCwgZW1haWwgdsOgIEFJLiBUaGFuaCBNYWkgc+G6vSB4w6FjIG5o4bqtbiDEkWnhu4F1IGtp4buHbiB2w6AgcGjhuqFtIHZpIMOhcCBk4bulbmcgdOG6oWkgdGjhu51pIMSRaeG7g20gxJHEg25nIGvDvS48L3A+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGl0ZS1iZW5lZml0LWNoaXBzIiBhcmlhLWxhYmVsPSJOaMOzbSB0aeG7h24gw61jaCBBTUlTIExpdGUiPgogICAgICAgICAgICAgICAgPHNwYW4+Q+G7mW5nIHTDoWMgbuG7mWkgYuG7mTwvc3Bhbj48c3Bhbj5DUk0gTGl0ZTwvc3Bhbj48c3Bhbj5OaMOibiBz4buxPC9zcGFuPjxzcGFuPkVtYWlsICYgbOG7i2NoPC9zcGFuPjxzcGFuPk1JU0EgT25lQUk8L3NwYW4+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgPGEgaHJlZj0iI2xpZW4taGUiIGNsYXNzPSJidG4gYnRuLXByaW1hcnkiPk5o4bqtbiDGsHUgxJHDo2kgQU1JUyBMaXRlPC9hPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvYXJ0aWNsZT4iIiIKCnBhdHRlcm4gPSByJyAgICAgICAgICA8YXJ0aWNsZSBjbGFzcz0ib2ZmZXItY2FyZCByZXZlYWwgZGVsYXktMSI+Lio/ICAgICAgICAgIDwvYXJ0aWNsZT4nCnMyLCBuID0gcmUuc3VibihwYXR0ZXJuLCByZXBsYWNlbWVudCwgcywgY291bnQ9MSwgZmxhZ3M9cmUuUykKaWYgbiAhPSAxIGFuZCAnb2ZmZXItY2FyZCBvZmZlci1jYXJkLWxpdGUnIG5vdCBpbiBzOgogICAgcmFpc2UgU3lzdGVtRXhpdChmIkNvdWxkIG5vdCByZXBsYWNlIEFNSVMgTGl0ZSBvZmZlciBjYXJkOyBtYXRjaGVzPXtufSIpCnAud3JpdGVfdGV4dChzMiwgZW5jb2Rpbmc9InV0Zi04IikKCmNzcyA9IFBhdGgoInN0eWxlcy5jc3MiKQpjID0gY3NzLnJlYWRfdGV4dChlbmNvZGluZz0idXRmLTgiKQptYXJrZXIgPSAiLyogQU1JUyBMaXRlIGFuaW1hdGVkIG9yYml0ICovIgpibG9jayA9ICIiIgovKiBBTUlTIExpdGUgYW5pbWF0ZWQgb3JiaXQgKi8KLm9mZmVyLWNhcmQtbGl0ZXtvdmVyZmxvdzpoaWRkZW47YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCNmZmYgMCUsI2Y2ZmJmZiAxMDAlKX0KLmxpdGUtb3JiaXQtc2NlbmV7cG9zaXRpb246cmVsYXRpdmU7YXNwZWN0LXJhdGlvOjQvMzttaW4taGVpZ2h0OjM2MHB4O292ZXJmbG93OmhpZGRlbjtiYWNrZ3JvdW5kOnJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgNTAlIDQ4JSwjZmZmIDAgMjAlLCNlYWY2ZmYgNDIlLCNkOGVmZmYgNjglLCNjN2U4ZmYgMTAwJSk7Ym9yZGVyLWJvdHRvbToxcHggc29saWQgI2Q4ZTdmODtpc29sYXRpb246aXNvbGF0ZX0KLmxpdGUtb3JiaXQtc2NlbmU6YmVmb3JlLC5saXRlLW9yYml0LXNjZW5lOmFmdGVye2NvbnRlbnQ6IiI7cG9zaXRpb246YWJzb2x1dGU7Ym9yZGVyLXJhZGl1czo1MCU7aW5zZXQ6OSU7Ym9yZGVyOjFweCBzb2xpZCByZ2JhKDE4LDEwMywyNDUsLjE4KTtib3gtc2hhZG93OjAgMCA0MHB4IHJnYmEoMjMsMTg0LDIzMCwuMTQpO3otaW5kZXg6MH0KLmxpdGUtb3JiaXQtc2NlbmU6YWZ0ZXJ7aW5zZXQ6MTglO2JvcmRlci1jb2xvcjpyZ2JhKDEwNiw5MiwyNTUsLjE2KX0KLmxpdGUtb3JiaXQtZ2xvd3twb3NpdGlvbjphYnNvbHV0ZTtpbnNldDoxNiU7Ym9yZGVyLXJhZGl1czo1MCU7YmFja2dyb3VuZDpyYWRpYWwtZ3JhZGllbnQoY2lyY2xlLHJnYmEoMjU1LDI1NSwyNTUsLjk1KSxyZ2JhKDI1NSwyNTUsMjU1LC42MikgNDUlLHJnYmEoMjQsMTY3LDIzMywuMDgpIDcwJSx0cmFuc3BhcmVudCk7ZmlsdGVyOmJsdXIoMnB4KTt6LWluZGV4OjB9Ci5saXRlLW9yYml0LXJpbmd7cG9zaXRpb246YWJzb2x1dGU7bGVmdDo1MCU7dG9wOjUwJTtib3JkZXItcmFkaXVzOjUwJTt0cmFuc2Zvcm06dHJhbnNsYXRlKC01MCUsLTUwJSk7Ym9yZGVyOjJweCBkYXNoZWQgcmdiYSgxOCwxMDMsMjQ1LC4yNCk7ei1pbmRleDowO2FuaW1hdGlvbjpvcmJpdFB1bHNlIDVzIGVhc2UtaW4tb3V0IGluZmluaXRlfQoucmluZy1he3dpZHRoOjc4JTtoZWlnaHQ6NzglfS5yaW5nLWJ7d2lkdGg6NjAlO2hlaWdodDo2MCU7YW5pbWF0aW9uLWRlbGF5Oi0yLjVzfQoubGl0ZS1vcmJpdC10cmFja3twb3NpdGlvbjphYnNvbHV0ZTtpbnNldDowO3otaW5kZXg6MjthbmltYXRpb246bGl0ZU9yYml0U3BpbiAyOHMgbGluZWFyIGluZmluaXRlO3RyYW5zZm9ybS1vcmlnaW46NTAlIDUwJX0KLmxpdGUtb3JiaXQtaXRlbXtwb3NpdGlvbjphYnNvbHV0ZTtsZWZ0OjUwJTt0b3A6NTAlO3dpZHRoOjE1MHB4O21pbi1oZWlnaHQ6NTJweDttYXJnaW46LTI2cHggMCAwIC03NXB4O2Rpc3BsYXk6ZmxleDthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjhweDtwYWRkaW5nOjdweCAxMHB4O2JvcmRlci1yYWRpdXM6MTZweDtiYWNrZ3JvdW5kOnJnYmEoMjU1LDI1NSwyNTUsLjk0KTtib3JkZXI6MXB4IHNvbGlkIHJnYmEoMTcyLDIwNywyNDYsLjg1KTtib3gtc2hhZG93OjAgOHB4IDI0cHggcmdiYSgxOSw3NiwxNDksLjEzKTtiYWNrZHJvcC1maWx0ZXI6Ymx1cig4cHgpO2FuaW1hdGlvbjpsaXRlT3JiaXRDb3VudGVyIDI4cyBsaW5lYXIgaW5maW5pdGU7dHJhbnNmb3JtLW9yaWdpbjo1MCUgNTAlfQoubGl0ZS1vcmJpdC1pdGVtIGJ7Zm9udC1zaXplOjlweDtsaW5lLWhlaWdodDoxLjI1O2NvbG9yOiMxNTNjNzl9Ci5saXRlLWljb257ZmxleDowIDAgMzZweDt3aWR0aDozNnB4O2hlaWdodDozNnB4O2Rpc3BsYXk6Z3JpZDtwbGFjZS1pdGVtczpjZW50ZXI7Ym9yZGVyLXJhZGl1czoxMnB4O2NvbG9yOiNmZmY7Zm9udC1zaXplOjEzcHg7Zm9udC13ZWlnaHQ6OTAwO2JveC1zaGFkb3c6MCA3cHggMTZweCByZ2JhKDE4LDEwMywyNDUsLjE4KX0KLmxpdGUtaWNvbi5jaGF0LC5saXRlLWljb24uY2FsZW5kYXIsLmxpdGUtaWNvbi5tYWlsLC5saXRlLWljb24uY3Jte2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjMTI2N2Y1LCMxN2I4ZTYpfQoubGl0ZS1pY29uLnNvY2lhbCwubGl0ZS1pY29uLmhyLC5saXRlLWljb24uY29udGFjdHtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsIzZhNWNmZiwjODI0N2U1KX0KLmxpdGUtaWNvbi5ub3Rle2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjZmZiZjJmLCNmZjhhMDApfQoubGl0ZS1pY29uLnByb2Nlc3MsLmxpdGUtaWNvbi5wZW9wbGV7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCMxN2I4ZTYsIzIwYzhhOSl9Ci5saXRlLWljb24ub25lYWl7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCNmZjZiNGEsI2ZmM2IyZil9Ci5pdGVtLTF7dHJhbnNmb3JtOnJvdGF0ZSgwZGVnKSB0cmFuc2xhdGVYKDQyJSkgcm90YXRlKDBkZWcpfQouaXRlbS0ye3RyYW5zZm9ybTpyb3RhdGUoMzIuN2RlZykgdHJhbnNsYXRlWCg0MiUpIHJvdGF0ZSgtMzIuN2RlZyl9Ci5pdGVtLTN7dHJhbnNmb3JtOnJvdGF0ZSg2NS40ZGVnKSB0cmFuc2xhdGVYKDQyJSkgcm90YXRlKC02NS40ZGVnKX0KLml0ZW0tNHt0cmFuc2Zvcm06cm90YXRlKDk4LjFkZWcpIHRyYW5zbGF0ZVgoNDIlKSByb3RhdGUoLTk4LjFkZWcpfQouaXRlbS01e3RyYW5zZm9ybTpyb3RhdGUoMTMwLjhkZWcpIHRyYW5zbGF0ZVgoNDIlKSByb3RhdGUoLTEzMC44ZGVnKX0KLml0ZW0tNnt0cmFuc2Zvcm06cm90YXRlKDE2My41ZGVnKSB0cmFuc2xhdGVYKDQyJSkgcm90YXRlKC0xNjMuNWRlZyl9Ci5pdGVtLTd7dHJhbnNmb3JtOnJvdGF0ZSgxOTYuMmRlZykgdHJhbnNsYXRlWCg0MiUpIHJvdGF0ZSgtMTk2LjJkZWcpfQouaXRlbS04e3RyYW5zZm9ybTpyb3RhdGUoMjI4LjlkZWcpIHRyYW5zbGF0ZVgoNDIlKSByb3RhdGUoLTIyOC45ZGVnKX0KLml0ZW0tOXt0cmFuc2Zvcm06cm90YXRlKDI2MS42ZGVnKSB0cmFuc2xhdGVYKDQyJSkgcm90YXRlKC0yNjEuNmRlZyl9Ci5pdGVtLTEwe3RyYW5zZm9ybTpyb3RhdGUoMjk0LjNkZWcpIHRyYW5zbGF0ZVgoNDIlKSByb3RhdGUoLTI5NC4zZGVnKX0KLml0ZW0tMTF7dHJhbnNmb3JtOnJvdGF0ZSgzMjdkZWcpIHRyYW5zbGF0ZVgoNDIlKSByb3RhdGUoLTMyN2RlZyl9Ci5saXRlLWNlbnRlci1jYXJke3Bvc2l0aW9uOmFic29sdXRlO2xlZnQ6NTAlO3RvcDo1MCU7ei1pbmRleDozO3RyYW5zZm9ybTp0cmFuc2xhdGUoLTUwJSwtNTAlKTt3aWR0aDo0NCU7bWluLXdpZHRoOjIxMHB4O3RleHQtYWxpZ246Y2VudGVyO2JhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwuOTQpO2JvcmRlcjoxcHggc29saWQgI2Q0ZThmZjtib3JkZXItcmFkaXVzOjI4cHg7cGFkZGluZzoxOHB4IDE4cHggMTZweDtib3gtc2hhZG93OjAgMjJweCA2MHB4IHJnYmEoMTAsNzQsMTU4LC4yKX0KLmxpdGUtY2VudGVyLWNhcmQgaW1ne3dpZHRoOjE1MHB4O21heC13aWR0aDo3OCU7aGVpZ2h0OmF1dG87bWFyZ2luOjAgYXV0byA4cHh9LmxpdGUtY2VudGVyLWtpY2tlcntkaXNwbGF5OmJsb2NrO2NvbG9yOiMyNzY2YmQ7Zm9udC1zaXplOjlweDtmb250LXdlaWdodDo4MDA7bGV0dGVyLXNwYWNpbmc6LjEyZW07dGV4dC10cmFuc2Zvcm06dXBwZXJjYXNlfS5saXRlLWNlbnRlci1jYXJkPnN0cm9uZ3tkaXNwbGF5OmJsb2NrO2ZvbnQtc2l6ZTpjbGFtcCgyNHB4LDMuMnZ3LDQycHgpO2xpbmUtaGVpZ2h0OjE7Y29sb3I6IzBkNWJkNztsZXR0ZXItc3BhY2luZzotLjA0ZW07bWFyZ2luOjRweCAwIDEwcHh9LmxpdGUtY2VudGVyLWNhcmQ+c21hbGx7ZGlzcGxheTpibG9jaztjb2xvcjojMmI1NzkzO2ZvbnQtc2l6ZTo5cHg7Zm9udC13ZWlnaHQ6NzAwO21hcmdpbi10b3A6OHB4fQoubGl0ZS1vZmZlci1iYWRnZXtkaXNwbGF5OmZsZXg7anVzdGlmeS1jb250ZW50OmNlbnRlcjthbGlnbi1pdGVtczpjZW50ZXI7Z2FwOjVweDtmbGV4LXdyYXA6d3JhcH0ubGl0ZS1vZmZlci1iYWRnZSBzcGFue2ZvbnQtc2l6ZTo4cHg7Zm9udC13ZWlnaHQ6OTAwO2NvbG9yOiNmZmY7YmFja2dyb3VuZDojMTI2N2Y1O2JvcmRlci1yYWRpdXM6OTk5cHg7cGFkZGluZzo0cHggN3B4fS5saXRlLW9mZmVyLWJhZGdlIGJ7Zm9udC1zaXplOjEycHg7Y29sb3I6I2ZmOGEwMH0ubGl0ZS1vZmZlci1iYWRnZSBlbXtmb250LXN0eWxlOm5vcm1hbDtmb250LXNpemU6OXB4O2ZvbnQtd2VpZ2h0OjkwMDtjb2xvcjojZmZmO2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDEzNWRlZywjZmY2MDNhLCNmZjM0NDYpO2JvcmRlci1yYWRpdXM6OHB4O3BhZGRpbmc6NHB4IDdweH0KLmxpdGUtb2ZmZXItYm9keXtwYWRkaW5nLXRvcDoyNHB4fS5saXRlLWJlbmVmaXQtY2hpcHN7ZGlzcGxheTpmbGV4O2ZsZXgtd3JhcDp3cmFwO2dhcDo3cHg7bWFyZ2luOjE0cHggMCAyMHB4fS5saXRlLWJlbmVmaXQtY2hpcHMgc3Bhbntmb250LXNpemU6MTBweDtmb250LXdlaWdodDo3MDA7Y29sb3I6IzMxNWM5MjtiYWNrZ3JvdW5kOiNlZWY2ZmY7Ym9yZGVyOjFweCBzb2xpZCAjZDNlNmZiO2JvcmRlci1yYWRpdXM6OTk5cHg7cGFkZGluZzo2cHggOXB4fQpAa2V5ZnJhbWVzIGxpdGVPcmJpdFNwaW57dG97dHJhbnNmb3JtOnJvdGF0ZSgzNjBkZWcpfX0KQGtleWZyYW1lcyBsaXRlT3JiaXRDb3VudGVye3Rve3JvdGF0ZTotMzYwZGVnfX0KQGtleWZyYW1lcyBvcmJpdFB1bHNlezAlLDEwMCV7b3BhY2l0eTouNDU7c2NhbGU6MX01MCV7b3BhY2l0eTouOTtzY2FsZToxLjAzfX0KQG1lZGlhIChtYXgtd2lkdGg6MTAyMHB4KXsubGl0ZS1vcmJpdC1zY2VuZXttaW4taGVpZ2h0OjM0MHB4fS5saXRlLW9yYml0LWl0ZW17d2lkdGg6MTMycHg7bWFyZ2luLWxlZnQ6LTY2cHh9LmxpdGUtb3JiaXQtaXRlbSBie2ZvbnQtc2l6ZTo4cHh9LmxpdGUtY2VudGVyLWNhcmR7d2lkdGg6NDYlfX0KQG1lZGlhIChtYXgtd2lkdGg6NzIwcHgpey5vZmZlci1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmxpdGUtb3JiaXQtc2NlbmV7YXNwZWN0LXJhdGlvOjEvMTttaW4taGVpZ2h0OjM5MHB4fS5saXRlLW9yYml0LWl0ZW17d2lkdGg6MTEycHg7bWluLWhlaWdodDo0NnB4O21hcmdpbjotMjNweCAwIDAgLTU2cHg7cGFkZGluZzo2cHggOHB4fS5saXRlLW9yYml0LWl0ZW0gYntmb250LXNpemU6N3B4fS5saXRlLWljb257d2lkdGg6MzBweDtoZWlnaHQ6MzBweDtmbGV4LWJhc2lzOjMwcHg7Zm9udC1zaXplOjEwcHh9LmxpdGUtY2VudGVyLWNhcmR7d2lkdGg6NDklO21pbi13aWR0aDoxNzBweDtwYWRkaW5nOjE0cHggMTJweDtib3JkZXItcmFkaXVzOjIycHh9LmxpdGUtY2VudGVyLWNhcmQgaW1ne3dpZHRoOjExNXB4fS5saXRlLWNlbnRlci1jYXJkPnN0cm9uZ3tmb250LXNpemU6MjdweH0ubGl0ZS1jZW50ZXItY2FyZD5zbWFsbHtmb250LXNpemU6N3B4fS5saXRlLW9mZmVyLWJhZGdlIGJ7Zm9udC1zaXplOjEwcHh9LmxpdGUtb2ZmZXItYmFkZ2UgZW17Zm9udC1zaXplOjdweH0ubGl0ZS1vcmJpdC1zY2VuZTpiZWZvcmV7aW5zZXQ6NyV9LmxpdGUtb3JiaXQtc2NlbmU6YWZ0ZXJ7aW5zZXQ6MTYlfX0KQG1lZGlhIChwcmVmZXJzLXJlZHVjZWQtbW90aW9uOnJlZHVjZSl7LmxpdGUtb3JiaXQtdHJhY2ssLmxpdGUtb3JiaXQtaXRlbSwubGl0ZS1vcmJpdC1yaW5ne2FuaW1hdGlvbjpub25lIWltcG9ydGFudH19CiIiIgppZiBtYXJrZXIgaW4gYzoKICAgIGMgPSBjWzpjLmluZGV4KG1hcmtlcildLnJzdHJpcCgpICsgIlxuIiArIGJsb2NrCmVsc2U6CiAgICBjID0gYy5yc3RyaXAoKSArICJcbiIgKyBibG9jawpjc3Mud3JpdGVfdGV4dChjLCBlbmNvZGluZz0idXRmLTgiKQo=
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-
-          replacement = '''          <article class="offer-card offer-card-lite reveal delay-1">
-            <div class="lite-orbit-scene" role="img" aria-label="Bộ giải pháp AMIS Lite với các sản phẩm chuyển động quanh logo MISA AMIS">
-              <div class="lite-orbit-glow"></div>
-              <div class="lite-orbit-ring ring-a"></div>
-              <div class="lite-orbit-ring ring-b"></div>
-
-              <div class="lite-orbit-track" aria-hidden="true">
-                <div class="lite-orbit-item item-1"><span class="lite-icon chat">●●●</span><b>AMIS Chat</b></div>
-                <div class="lite-orbit-item item-2"><span class="lite-icon social">✣</span><b>AMIS Mạng xã hội</b></div>
-                <div class="lite-orbit-item item-3"><span class="lite-icon note">≡</span><b>AMIS Ghi chép</b></div>
-                <div class="lite-orbit-item item-4"><span class="lite-icon process">Q</span><b>AMIS Quy trình</b></div>
-                <div class="lite-orbit-item item-5"><span class="lite-icon crm">◎</span><b>AMIS CRM Lite</b></div>
-                <div class="lite-orbit-item item-6"><span class="lite-icon hr">i</span><b>AMIS Nhân viên</b></div>
-                <div class="lite-orbit-item item-7"><span class="lite-icon people">👥</span><b>AMIS Thông tin nhân sự</b></div>
-                <div class="lite-orbit-item item-8"><span class="lite-icon mail">✉</span><b>AMIS Mail</b></div>
-                <div class="lite-orbit-item item-9"><span class="lite-icon contact">☎</span><b>AMIS Danh bạ</b></div>
-                <div class="lite-orbit-item item-10"><span class="lite-icon calendar">▣</span><b>AMIS Lịch</b></div>
-                <div class="lite-orbit-item item-11"><span class="lite-icon oneai">✦</span><b>MISA OneAI</b></div>
-              </div>
-
-              <div class="lite-center-card">
-                <img src="assets/misa-amis-logo.webp" alt="MISA AMIS" loading="lazy" />
-                <span class="lite-center-kicker">Bộ giải pháp</span>
-                <strong>AMIS LITE</strong>
-                <div class="lite-offer-badge"><span>QUÀ TẶNG</span><b>0 ĐỒNG</b><em>100% MIỄN PHÍ</em></div>
-                <small>Khi mua phần mềm AMIS Kế toán</small>
-              </div>
-            </div>
-
-            <div class="offer-body lite-offer-body">
-              <span class="offer-tag">Quà tặng AMIS Lite</span>
-              <h3>Nhận bộ giải pháp AMIS Lite 0 đồng</h3>
-              <p>Theo chương trình ưu đãi mới, doanh nghiệp mua AMIS Kế toán có thể nhận bộ công cụ AMIS Lite gồm các tiện ích cộng tác, khách hàng, nhân sự, lịch, email và AI. Thanh Mai sẽ xác nhận điều kiện và phạm vi áp dụng tại thời điểm đăng ký.</p>
-              <div class="lite-benefit-chips" aria-label="Nhóm tiện ích AMIS Lite">
-                <span>Cộng tác nội bộ</span><span>CRM Lite</span><span>Nhân sự</span><span>Email & lịch</span><span>MISA OneAI</span>
-              </div>
-              <a href="#lien-he" class="btn btn-primary">Nhận ưu đãi AMIS Lite</a>
-            </div>
-          </article>'''
-
-          pattern = r'          <article class="offer-card reveal delay-1">.*?          </article>'
-          s2, n = re.subn(pattern, replacement, s, count=1, flags=re.S)
-          if n != 1:
-              raise SystemExit(f'Could not replace AMIS Lite offer card; matches={n}')
-          p.write_text(s2, encoding='utf-8')
-
-          css = Path('styles.css')
-          c = css.read_text(encoding='utf-8')
-          marker = '/* AMIS Lite animated orbit */'
-          block = r'''
-/* AMIS Lite animated orbit */
-.offer-card-lite{overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f6fbff 100%)}
-.lite-orbit-scene{position:relative;aspect-ratio:4/3;min-height:360px;overflow:hidden;background:radial-gradient(circle at 50% 48%,#fff 0 20%,#eaf6ff 42%,#d8efff 68%,#c7e8ff 100%);border-bottom:1px solid #d8e7f8;isolation:isolate}
-.lite-orbit-scene:before,.lite-orbit-scene:after{content:"";position:absolute;border-radius:50%;inset:9%;border:1px solid rgba(18,103,245,.18);box-shadow:0 0 40px rgba(23,184,230,.14);z-index:0}
-.lite-orbit-scene:after{inset:18%;border-color:rgba(106,92,255,.16)}
-.lite-orbit-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,.62) 45%,rgba(24,167,233,.08) 70%,transparent);filter:blur(2px);z-index:0}
-.lite-orbit-ring{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);border:2px dashed rgba(18,103,245,.24);z-index:0;animation:orbitPulse 5s ease-in-out infinite}
-.ring-a{width:78%;height:78%}.ring-b{width:60%;height:60%;animation-delay:-2.5s}
-.lite-orbit-track{position:absolute;inset:0;z-index:2;animation:liteOrbitSpin 28s linear infinite;transform-origin:50% 50%}
-.lite-orbit-item{position:absolute;left:50%;top:50%;width:150px;min-height:52px;margin:-26px 0 0 -75px;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(172,207,246,.85);box-shadow:0 8px 24px rgba(19,76,149,.13);backdrop-filter:blur(8px);animation:liteOrbitCounter 28s linear infinite;transform-origin:50% 50%}
-.lite-orbit-item b{font-size:9px;line-height:1.25;color:#153c79}
-.lite-icon{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;color:#fff;font-size:13px;font-weight:900;box-shadow:0 7px 16px rgba(18,103,245,.18)}
-.lite-icon.chat,.lite-icon.calendar,.lite-icon.mail,.lite-icon.crm{background:linear-gradient(135deg,#1267f5,#17b8e6)}
-.lite-icon.social,.lite-icon.hr,.lite-icon.contact{background:linear-gradient(135deg,#6a5cff,#8247e5)}
-.lite-icon.note{background:linear-gradient(135deg,#ffbf2f,#ff8a00)}
-.lite-icon.process,.lite-icon.people{background:linear-gradient(135deg,#17b8e6,#20c8a9)}
-.lite-icon.oneai{background:linear-gradient(135deg,#ff6b4a,#ff3b2f)}
-.item-1{transform:rotate(0deg) translateX(42%) rotate(0deg)}
-.item-2{transform:rotate(32.7deg) translateX(42%) rotate(-32.7deg)}
-.item-3{transform:rotate(65.4deg) translateX(42%) rotate(-65.4deg)}
-.item-4{transform:rotate(98.1deg) translateX(42%) rotate(-98.1deg)}
-.item-5{transform:rotate(130.8deg) translateX(42%) rotate(-130.8deg)}
-.item-6{transform:rotate(163.5deg) translateX(42%) rotate(-163.5deg)}
-.item-7{transform:rotate(196.2deg) translateX(42%) rotate(-196.2deg)}
-.item-8{transform:rotate(228.9deg) translateX(42%) rotate(-228.9deg)}
-.item-9{transform:rotate(261.6deg) translateX(42%) rotate(-261.6deg)}
-.item-10{transform:rotate(294.3deg) translateX(42%) rotate(-294.3deg)}
-.item-11{transform:rotate(327deg) translateX(42%) rotate(-327deg)}
-.lite-center-card{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);width:44%;min-width:210px;text-align:center;background:rgba(255,255,255,.94);border:1px solid #d4e8ff;border-radius:28px;padding:18px 18px 16px;box-shadow:0 22px 60px rgba(10,74,158,.2)}
-.lite-center-card img{width:150px;max-width:78%;height:auto;margin:0 auto 8px}.lite-center-kicker{display:block;color:#2766bd;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.lite-center-card>strong{display:block;font-size:clamp(24px,3.2vw,42px);line-height:1;color:#0d5bd7;letter-spacing:-.04em;margin:4px 0 10px}.lite-center-card>small{display:block;color:#2b5793;font-size:9px;font-weight:700;margin-top:8px}
-.lite-offer-badge{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap}.lite-offer-badge span{font-size:8px;font-weight:900;color:#fff;background:#1267f5;border-radius:999px;padding:4px 7px}.lite-offer-badge b{font-size:12px;color:#ff8a00}.lite-offer-badge em{font-style:normal;font-size:9px;font-weight:900;color:#fff;background:linear-gradient(135deg,#ff603a,#ff3446);border-radius:8px;padding:4px 7px}
-.lite-offer-body{padding-top:24px}.lite-benefit-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 20px}.lite-benefit-chips span{font-size:10px;font-weight:700;color:#315c92;background:#eef6ff;border:1px solid #d3e6fb;border-radius:999px;padding:6px 9px}
-@keyframes liteOrbitSpin{to{transform:rotate(360deg)}}
-@keyframes liteOrbitCounter{to{rotate:-360deg}}
-@keyframes orbitPulse{0%,100%{opacity:.45;scale:1}50%{opacity:.9;scale:1.03}}
-@media (max-width:1020px){.lite-orbit-scene{min-height:340px}.lite-orbit-item{width:132px;margin-left:-66px}.lite-orbit-item b{font-size:8px}.lite-center-card{width:46%}}
-@media (max-width:720px){.offer-grid{grid-template-columns:1fr}.lite-orbit-scene{aspect-ratio:1/1;min-height:390px}.lite-orbit-item{width:112px;min-height:46px;margin:-23px 0 0 -56px;padding:6px 8px}.lite-orbit-item b{font-size:7px}.lite-icon{width:30px;height:30px;flex-basis:30px;font-size:10px}.lite-center-card{width:49%;min-width:170px;padding:14px 12px;border-radius:22px}.lite-center-card img{width:115px}.lite-center-card>strong{font-size:27px}.lite-center-card>small{font-size:7px}.lite-offer-badge b{font-size:10px}.lite-offer-badge em{font-size:7px}.lite-orbit-scene:before{inset:7%}.lite-orbit-scene:after{inset:16%}}
-@media (prefers-reduced-motion:reduce){.lite-orbit-track,.lite-orbit-item,.lite-orbit-ring{animation:none!important}}
-'''
-          if marker in c:
-              c = c[:c.index(marker)].rstrip() + '\n' + block
-          else:
-              c = c.rstrip() + '\n' + block
-          css.write_text(c, encoding='utf-8')
-          PY
-
-      - name: Commit final landing update
-        shell: bash
+          printf '%s' "$PATCH_B64" | base64 -d > /tmp/patch.py
+          python /tmp/patch.py
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
