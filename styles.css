@@ -173,3 +173,42 @@ button{cursor:pointer}
   body{padding-bottom:70px}.modal-content{padding:28px 20px}.qr-modal img{width:230px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.btn,.offer-image img{transition:none}}
+
+/* AMIS Lite animated orbit */
+.offer-card-lite{overflow:hidden;background:linear-gradient(180deg,#fff 0%,#f6fbff 100%)}
+.lite-orbit-scene{position:relative;aspect-ratio:4/3;min-height:360px;overflow:hidden;background:radial-gradient(circle at 50% 48%,#fff 0 20%,#eaf6ff 42%,#d8efff 68%,#c7e8ff 100%);border-bottom:1px solid #d8e7f8;isolation:isolate}
+.lite-orbit-scene:before,.lite-orbit-scene:after{content:"";position:absolute;border-radius:50%;inset:9%;border:1px solid rgba(18,103,245,.18);box-shadow:0 0 40px rgba(23,184,230,.14);z-index:0}
+.lite-orbit-scene:after{inset:18%;border-color:rgba(106,92,255,.16)}
+.lite-orbit-glow{position:absolute;inset:16%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,.62) 45%,rgba(24,167,233,.08) 70%,transparent);filter:blur(2px);z-index:0}
+.lite-orbit-ring{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);border:2px dashed rgba(18,103,245,.24);z-index:0;animation:orbitPulse 5s ease-in-out infinite}
+.ring-a{width:78%;height:78%}.ring-b{width:60%;height:60%;animation-delay:-2.5s}
+.lite-orbit-track{position:absolute;inset:0;z-index:2;animation:liteOrbitSpin 28s linear infinite;transform-origin:50% 50%}
+.lite-orbit-item{position:absolute;left:50%;top:50%;width:150px;min-height:52px;margin:-26px 0 0 -75px;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(172,207,246,.85);box-shadow:0 8px 24px rgba(19,76,149,.13);backdrop-filter:blur(8px);animation:liteOrbitCounter 28s linear infinite;transform-origin:50% 50%}
+.lite-orbit-item b{font-size:9px;line-height:1.25;color:#153c79}
+.lite-icon{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;color:#fff;font-size:13px;font-weight:900;box-shadow:0 7px 16px rgba(18,103,245,.18)}
+.lite-icon.chat,.lite-icon.calendar,.lite-icon.mail,.lite-icon.crm{background:linear-gradient(135deg,#1267f5,#17b8e6)}
+.lite-icon.social,.lite-icon.hr,.lite-icon.contact{background:linear-gradient(135deg,#6a5cff,#8247e5)}
+.lite-icon.note{background:linear-gradient(135deg,#ffbf2f,#ff8a00)}
+.lite-icon.process,.lite-icon.people{background:linear-gradient(135deg,#17b8e6,#20c8a9)}
+.lite-icon.oneai{background:linear-gradient(135deg,#ff6b4a,#ff3b2f)}
+.item-1{transform:rotate(0deg) translateX(42%) rotate(0deg)}
+.item-2{transform:rotate(32.7deg) translateX(42%) rotate(-32.7deg)}
+.item-3{transform:rotate(65.4deg) translateX(42%) rotate(-65.4deg)}
+.item-4{transform:rotate(98.1deg) translateX(42%) rotate(-98.1deg)}
+.item-5{transform:rotate(130.8deg) translateX(42%) rotate(-130.8deg)}
+.item-6{transform:rotate(163.5deg) translateX(42%) rotate(-163.5deg)}
+.item-7{transform:rotate(196.2deg) translateX(42%) rotate(-196.2deg)}
+.item-8{transform:rotate(228.9deg) translateX(42%) rotate(-228.9deg)}
+.item-9{transform:rotate(261.6deg) translateX(42%) rotate(-261.6deg)}
+.item-10{transform:rotate(294.3deg) translateX(42%) rotate(-294.3deg)}
+.item-11{transform:rotate(327deg) translateX(42%) rotate(-327deg)}
+.lite-center-card{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);width:44%;min-width:210px;text-align:center;background:rgba(255,255,255,.94);border:1px solid #d4e8ff;border-radius:28px;padding:18px 18px 16px;box-shadow:0 22px 60px rgba(10,74,158,.2)}
+.lite-center-card img{width:150px;max-width:78%;height:auto;margin:0 auto 8px}.lite-center-kicker{display:block;color:#2766bd;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.lite-center-card>strong{display:block;font-size:clamp(24px,3.2vw,42px);line-height:1;color:#0d5bd7;letter-spacing:-.04em;margin:4px 0 10px}.lite-center-card>small{display:block;color:#2b5793;font-size:9px;font-weight:700;margin-top:8px}
+.lite-offer-badge{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap}.lite-offer-badge span{font-size:8px;font-weight:900;color:#fff;background:#1267f5;border-radius:999px;padding:4px 7px}.lite-offer-badge b{font-size:12px;color:#ff8a00}.lite-offer-badge em{font-style:normal;font-size:9px;font-weight:900;color:#fff;background:linear-gradient(135deg,#ff603a,#ff3446);border-radius:8px;padding:4px 7px}
+.lite-offer-body{padding-top:24px}.lite-benefit-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 20px}.lite-benefit-chips span{font-size:10px;font-weight:700;color:#315c92;background:#eef6ff;border:1px solid #d3e6fb;border-radius:999px;padding:6px 9px}
+@keyframes liteOrbitSpin{to{transform:rotate(360deg)}}
+@keyframes liteOrbitCounter{to{rotate:-360deg}}
+@keyframes orbitPulse{0%,100%{opacity:.45;scale:1}50%{opacity:.9;scale:1.03}}
+@media (max-width:1020px){.lite-orbit-scene{min-height:340px}.lite-orbit-item{width:132px;margin-left:-66px}.lite-orbit-item b{font-size:8px}.lite-center-card{width:46%}}
+@media (max-width:720px){.offer-grid{grid-template-columns:1fr}.lite-orbit-scene{aspect-ratio:1/1;min-height:390px}.lite-orbit-item{width:112px;min-height:46px;margin:-23px 0 0 -56px;padding:6px 8px}.lite-orbit-item b{font-size:7px}.lite-icon{width:30px;height:30px;flex-basis:30px;font-size:10px}.lite-center-card{width:49%;min-width:170px;padding:14px 12px;border-radius:22px}.lite-center-card img{width:115px}.lite-center-card>strong{font-size:27px}.lite-center-card>small{font-size:7px}.lite-offer-badge b{font-size:10px}.lite-offer-badge em{font-size:7px}.lite-orbit-scene:before{inset:7%}.lite-orbit-scene:after{inset:16%}}
+@media (prefers-reduced-motion:reduce){.lite-orbit-track,.lite-orbit-item,.lite-orbit-ring{animation:none!important}}
