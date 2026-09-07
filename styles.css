@@ -212,3 +212,7 @@ button{cursor:pointer}
 @media (max-width:1020px){.lite-orbit-scene{min-height:340px}.lite-orbit-item{width:132px;margin-left:-66px}.lite-orbit-item b{font-size:8px}.lite-center-card{width:46%}}
 @media (max-width:720px){.offer-grid{grid-template-columns:1fr}.lite-orbit-scene{aspect-ratio:1/1;min-height:390px}.lite-orbit-item{width:112px;min-height:46px;margin:-23px 0 0 -56px;padding:6px 8px}.lite-orbit-item b{font-size:7px}.lite-icon{width:30px;height:30px;flex-basis:30px;font-size:10px}.lite-center-card{width:49%;min-width:170px;padding:14px 12px;border-radius:22px}.lite-center-card img{width:115px}.lite-center-card>strong{font-size:27px}.lite-center-card>small{font-size:7px}.lite-offer-badge b{font-size:10px}.lite-offer-badge em{font-size:7px}.lite-orbit-scene:before{inset:7%}.lite-orbit-scene:after{inset:16%}}
 @media (prefers-reduced-motion:reduce){.lite-orbit-track,.lite-orbit-item,.lite-orbit-ring{animation:none!important}}
+/* AMIS Lite GIF shell */
+.lite-gif-shell{position:relative;overflow:hidden;background:linear-gradient(180deg,#f5fbff,#e8f6ff);border-bottom:1px solid #d8e7f8}
+.lite-gif-shell img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+@media(max-width:720px){.lite-gif-shell img{aspect-ratio:1/1;object-fit:cover}}
